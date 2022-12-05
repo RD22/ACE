@@ -42,10 +42,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include <Wire.h>
 #include <vl53l0x_class.h>
+#include "TOF.h"
 
-#define SDA 14
-#define SCL 15
-#define XSHUNT 5
 // Create components.
 TwoWire WIRE1(SDA, SCL);  //SDA=PB11 & SCL=PB10
 VL53L0X sensor_vl53l0x(&WIRE1, XSHUNT); //XSHUNT=PC6

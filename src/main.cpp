@@ -2,7 +2,7 @@
 #include "TOF.h"
 
 uint32_t distance;
-    char report[64];
+char report[64];
 
 void setup(){
     TOF_setup();
