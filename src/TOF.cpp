@@ -88,7 +88,7 @@ uint32_t TOF_read() {
   uint32_t distance;
   int status;
   status = sensor_vl53l0x.GetDistance(&distance);
-  delay(150);
+  delay(200);
 
   if (status == VL53L0X_ERROR_NONE)
   {    
