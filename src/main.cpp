@@ -4,9 +4,11 @@
 #include "RP2040_PWM.h"
 #include "TOF.h"
 #include "commands.h"
+#include "Sonar.h"
 
 // pin 25 is the built in LED for the Pi Pico (NOT for the Pi Pico W)
 #define PWM0_pin 25
+#define TOF 0
 
 //creates pwm instance
 RP2040_PWM* PWM_Instance;
@@ -32,17 +34,11 @@ void process_command(char command, float value)
 }
 
 
-// creates variable to receive ditance from TOF and string to print it
-uint32_t distance;
-char report[64];
-
-
-
 void setup(){
   //serial_commands.init(process_command);
 
   // Start the serial port with 115200 baudrate
-  // Serial.begin(115200);
+  Serial.begin(115200);
 
 
   //assigns pin 25 (built in LED), with frequency of [LED_frequency] Hz and a duty cycle of [LED_intensity]%
@@ -50,13 +46,26 @@ void setup(){
   //PWM_Instance = new RP2040_PWM(PWM0_pin, LED_frequency, LED_intensity);
 
   //interval = 10;
-
-  TOF_setup();
+  if (TOF ==1){
+    TOF_setup();
+  }
+  else{
+    Sonar_setup();
+  }
 }    
 
-void loop(){    
-    distance = TOF_read();
-    snprintf(report, sizeof(report), "| Distance [mm]: %ld |", distance);
-    Serial.println(report);
+void loop(){  
+    if (TOF ==1){  
+      // creates variable to receive ditance from TOF and string to print it
+      uint32_t distance;
+      char report[64];
+      distance = TOF_read();
+      snprintf(report, sizeof(report), "| Distance [mm]: %ld |", distance);
+      Serial.println(report);
+    }
+    else{
+      float value = Sonar_read();
+      Serial.println(value);
+    }
 
 }
