@@ -14,5 +14,6 @@
         "memory": "cpp",
         "random": "cpp",
         "initializer_list": "cpp"
-    }
+    },
+    "ros.distro": "noetic"
 }
