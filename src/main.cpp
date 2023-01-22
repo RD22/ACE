@@ -55,7 +55,8 @@ void setup(){
 }    
 
 void loop(){  
-    if (TOF ==1){  
+    float *dist;
+    if (TOF == 1){  
       // creates variable to receive ditance from TOF and string to print it
       uint32_t distance;
       char report[64];
@@ -64,8 +65,10 @@ void loop(){
       Serial.println(report);
     }
     else{
-      float value = Sonar_read();
-      Serial.println(value);
+      Sonar_read(dist);
+      Serial.println(dist[0]);
+      Serial.println(dist[1]);
+      Serial.println(dist[2]);
     }
 
 }

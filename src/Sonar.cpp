@@ -24,19 +24,22 @@
 
 // D11 (7) == trigger, D12 (4) == echo
 // Using pio0 and sm 0
-NanoConnectHcSr04 sonar(3,4, pio0, 0);
+NanoConnectHcSr04 sonar_esq(3,4, pio0, 0);
+NanoConnectHcSr04 sonar_dir(7,8,pio0,0);
+NanoConnectHcSr04 sonar_mid(11,12,pio0,0);
 
 // distance value returned
 float value = 0.0;
 
 void Sonar_setup() {
-    //Serial.begin(115200);
+    Serial.begin(115200);
 
 }
 
-float Sonar_read() {
+void Sonar_read(float *dist) {
     // put your main code here, to run repeatedly:
-    value = sonar.readSonar();
-    //Serial.println(value);
-    return value;
+    dist[0] = sonar_esq.readSonar();
+    dist[1] = sonar_dir.readSonar();
+    dist[2] = sonar_mid.readSonar();
+    Serial.println(value);
 }

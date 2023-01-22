@@ -8,4 +8,4 @@
 #include <iostream>
 
 void Sonar_setup();
-float Sonar_read();
+void Sonar_read(float * dist);
